@@ -32,9 +32,7 @@ export default [
 		data: {
 			label: (
 				<React.Fragment>
-					This one has a
-					{' '}
-					<strong>custom style</strong>
+					<strong>Circle Boi</strong>
 				</React.Fragment>
 			),
 		},
@@ -43,7 +41,9 @@ export default [
 			background: '#D6D5E6',
 			color: '#333',
 			border: '1px solid #222138',
-			width: 180,
+			width: 20,
+			height: 20,
+			borderRadius: 20,
 		},
 	},
 	{
