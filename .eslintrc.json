@@ -59,7 +59,7 @@
 		],
 		"linebreak-style": [
 			"error",
-			"unix"
+			"windows"
 		],
 		"arrow-parens": [
 			"error",
