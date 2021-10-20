@@ -3,6 +3,14 @@
 		"browser": true,
 		"es2021": true
 	},
+	"extends": [
+		"react-app",
+		"react-app/jest",
+		"plugin:react/recommended",
+		"airbnb",
+		"plugin:react-hooks/recommended",
+		"plugin:markdown/recommended"
+	],
 	"parserOptions": {
 		"ecmaFeatures": {
 			"jsx": true

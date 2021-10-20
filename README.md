@@ -1,2 +1,1 @@
 # YeeHaw Graph
-

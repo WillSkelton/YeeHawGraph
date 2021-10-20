@@ -17,16 +17,6 @@
 		"test": "react-scripts test",
 		"eject": "react-scripts eject"
 	},
-	"eslintConfig": {
-		"extends": [
-			"react-app",
-			"react-app/jest",
-			"plugin:react/recommended",
-			"airbnb",
-			"plugin:react-hooks/recommended",
-			"plugin:markdown/recommended"
-		]
-	},
 	"browserslist": {
 		"production": [
 			">0.2%",
@@ -38,5 +28,11 @@
 			"last 1 firefox version",
 			"last 1 safari version"
 		]
+	},
+	"devDependencies": {
+		"eslint-config-airbnb": "^18.2.1",
+		"eslint-plugin-markdown": "^2.2.1",
+		"eslint-plugin-react-hooks": "^4.2.0",
+		"react-mermaid2": "^0.1.4"
 	}
 }
