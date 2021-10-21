@@ -69,7 +69,24 @@ const customElements = [
 			diameter: '100px',
 		},
 	},
-	{ id: 'e1-2', source: '1', target: '2', type: 'straight', animated: true },
+	{
+		id: 'e1-2',
+		source: '1',
+		target: '2',
+		sourceHandle: 'c',
+		targetHandle: 'd',
+		type: 'straight',
+		animated: true,
+	},
+	{
+		id: 'e1-2',
+		source: '2',
+		target: '1',
+		sourceHandle: 'c',
+		targetHandle: 'd',
+		type: 'straight',
+		animated: true,
+	},
 ];
 
 export function CustomFlow() {

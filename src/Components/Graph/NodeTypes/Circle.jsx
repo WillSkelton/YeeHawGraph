@@ -30,7 +30,27 @@ export function Circle(data) {
 			color: color || '#FFF',
 		}}>
 			<Handle
+				id="a"
+				type="source"
+				position="top"
+				style={{
+					...styles.Handle,
+					top: '2%',
+					left: '25%',
+				}} />
+
+			<Handle
+				id="b"
 				type="target"
+				position="top"
+				style={{
+					...styles.Handle,
+					top: '2%',
+					left: '72%',
+				}} />
+			<Handle
+				id="c"
+				type="source"
 				position="top"
 				style={{
 					...styles.Handle,
@@ -38,7 +58,8 @@ export function Circle(data) {
 				}} />
 			<div>{label}</div>
 			<Handle
-				type="source"
+				id="d"
+				type="target"
 				position="bottom"
 				style={{
 					...styles.Handle,
