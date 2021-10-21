@@ -13,6 +13,7 @@ import {
 } from '@mui/material';
 
 import { AddSharp } from '@mui/icons-material';
+import { StringIncrement } from '../../Modules/StringIncrementor';
 
 const red = '#DC143C';
 const green = '#3CB371';
@@ -60,6 +61,19 @@ export function Editor(props) {
 		setVertexSet({ ...vertexSet });
 	};
 
+	const handleVertexAdd = () => {
+		const nextVertexName = StringIncrement(vertices[vertices.length - 1]);
+
+		const copy = { ...vertexSet };
+		copy[nextVertexName] = vertices.map(() => 0);
+
+		for (const vertex of Object.keys(copy)) {
+			copy[vertex].push(0);
+		}
+
+		setVertexSet(copy);
+	};
+
 	return (
 		<TableContainer component={Paper}>
 			<Table size="small">
@@ -75,7 +89,9 @@ export function Editor(props) {
 								...styles.headerCell,
 							}}>
 							<Tooltip placement="right" title="Click to Add Vertex">
-								<IconButton style={styles.addButton}>
+								<IconButton
+									style={styles.addButton}
+									onClick={handleVertexAdd}>
 									<AddSharp />
 								</IconButton>
 							</Tooltip>

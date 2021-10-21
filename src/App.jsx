@@ -14,7 +14,7 @@ const Styles = () => ({
 	SidePanel: {
 		display: 'flex',
 		flexDirection: 'column',
-		width: '20%',
+		width: '40%',
 		height: '100%',
 		backgroundColor: '#4169E1',
 	},
@@ -33,7 +33,7 @@ const Styles = () => ({
 		border: '2px solid white',
 	},
 	GraphContainer: {
-		width: '80%',
+		width: '60%',
 		height: '100%',
 		backgroundColor: '#222',
 	},
