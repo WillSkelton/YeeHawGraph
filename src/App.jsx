@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Editor } from './Components/Editor/Editor';
-import { CustomFlow } from './Components/Graph/Graph';
+import { Graph } from './Components/Graph/Graph';
 import { GenerateNodes } from './Modules/GenerateNodes';
 
 document.getElementById('body').style.margin = '0px';
@@ -44,14 +44,21 @@ export function App() {
 	const styles = Styles();
 
 	const [vertexSet, setVertexSet] = useState({
-		A: [0, 1, 1, 1],
-		B: [1, 0, 1, 1],
-		C: [1, 1, 0, 1],
-		D: [1, 1, 1, 0],
+		A: [1, 0, 0, 0],
+		B: [0, 1, 0, 0],
+		C: [0, 0, 1, 0],
+		D: [0, 0, 0, 1],
 	});
+
+	const [elements, setElements] = useState([]);
+
+	useEffect(() => {
+		setElements(GenerateNodes(vertexSet));
+	}, []);
 
 	const updateVertexSet = newValue => {
 		setVertexSet(newValue);
+		setElements(GenerateNodes(newValue));
 	};
 
 	return (
@@ -65,7 +72,7 @@ export function App() {
 				<div style={styles.Legend} />
 			</div>
 			<div className="App" style={styles.GraphContainer}>
-				<CustomFlow elements={GenerateNodes(vertexSet)} />
+				<Graph elements={elements} />
 			</div>
 		</div>
 	);

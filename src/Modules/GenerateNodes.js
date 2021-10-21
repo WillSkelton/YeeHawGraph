@@ -58,9 +58,11 @@ export function GenerateNodes(vertexSet) {
 		nodes.push(node);
 
 		vertexSet[vertexName].forEach((matrixElement, columnNumber) => {
-			if (columnNumber === rowNumber) {
-				node.data.selfLoop = true;
+			if (columnNumber === rowNumber && matrixElement === 1) {
+				node.data.selfLoop = columnNumber === rowNumber;
+				return;
 			}
+
 			if (matrixElement !== 1) {
 				return;
 			}

@@ -31,7 +31,7 @@ export function Circle(data) {
 			color: color || '#FFF',
 			borderStyle: selfLoop ? 'double' : 'none',
 			borderColor: color || '#FFF',
-			borderWidth: '4px',
+			borderWidth: selfLoop ? '4px' : '0px',
 		}}>
 			<Handle
 				id="a"
