@@ -50,52 +50,53 @@ export function BasicFlow() {
 	);
 }
 
-const customElements = [
-	{
-		id: '1',
-		type: 'circle',
-		position: { x: 100, y: 100 },
-		data: {
-			label: 'Yee',
-			diameter: '100px',
-			selfLoop: true,
-		},
-	},
-	{
-		id: '2',
-		type: 'circle',
-		position: { x: 500, y: 500 },
-		data: {
-			label: 'Haw',
-			diameter: '100px',
-		},
-	},
-	{
-		id: 'e1-2',
-		source: '1',
-		target: '2',
-		sourceHandle: 'c',
-		targetHandle: 'd',
-		type: 'straight',
-		animated: true,
-	},
-	{
-		id: 'e1-2',
-		source: '2',
-		target: '1',
-		sourceHandle: 'c',
-		targetHandle: 'd',
-		type: 'straight',
-		animated: true,
-	},
-];
+// const customElements = [
+// {
+// id: '1',
+// type: 'circle',
+// position: { x: 100, y: 100 },
+// data: {
+// label: 'Yee',
+// diameter: '100px',
+// selfLoop: true,
+// },
+// },
+// {
+// id: '2',
+// type: 'circle',
+// position: { x: 500, y: 500 },
+// data: {
+// label: 'Haw',
+// diameter: '100px',
+// },
+// },
+// {
+// id: 'e1-2',
+// source: '1',
+// target: '2',
+// sourceHandle: 'c',
+// targetHandle: 'd',
+// type: 'straight',
+// animated: true,
+// },
+// {
+// id: 'e1-2',
+// source: '2',
+// target: '1',
+// sourceHandle: 'c',
+// targetHandle: 'd',
+// type: 'straight',
+// animated: true,
+// },
+// ];
 
-export function CustomFlow() {
+export function CustomFlow(props) {
+	const { elements } = props;
 	const onElementsRemove = () => { };
 	const onConnect = () => { };
 	return (
 		<ReactFlow
-			elements={customElements}
+			elements={elements}
 			nodeTypes={NodeTypes}
 			onElementsRemove={onElementsRemove}
 			onConnect={onConnect}

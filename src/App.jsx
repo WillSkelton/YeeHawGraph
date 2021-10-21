@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Editor } from './Components/Editor/Editor';
 import { CustomFlow } from './Components/Graph/Graph';
+import { GenerateNodes } from './Modules/GenerateNodes';
 
 document.getElementById('body').style.margin = '0px';
 
@@ -14,7 +15,7 @@ const Styles = () => ({
 	SidePanel: {
 		display: 'flex',
 		flexDirection: 'column',
-		width: '40%',
+		width: '25%',
 		height: '100%',
 		backgroundColor: '#4169E1',
 	},
@@ -33,7 +34,7 @@ const Styles = () => ({
 		border: '2px solid white',
 	},
 	GraphContainer: {
-		width: '60%',
+		width: '75%',
 		height: '100%',
 		backgroundColor: '#222',
 	},
@@ -49,18 +50,22 @@ export function App() {
 		D: [1, 1, 1, 0],
 	});
 
+	const updateVertexSet = newValue => {
+		setVertexSet(newValue);
+	};
+
 	return (
 		<div className="App" style={styles.App}>
 			<div className="App" style={styles.SidePanel}>
 				<div style={styles.Editor}>
 					<Editor
 						vertexSet={vertexSet}
-						setVertexSet={setVertexSet} />
+						setVertexSet={updateVertexSet} />
 				</div>
 				<div style={styles.Legend} />
 			</div>
 			<div className="App" style={styles.GraphContainer}>
-				<CustomFlow />
+				<CustomFlow elements={GenerateNodes(vertexSet)} />
 			</div>
 		</div>
 	);
