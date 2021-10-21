@@ -1,5 +1,5 @@
 import React from 'react';
-import Graph from './Components/Graph/Graph';
+import { CustomFlow } from './Components/Graph/Graph';
 
 document.getElementById('body').style.margin = '0px';
 
@@ -28,7 +28,7 @@ export function App() {
 		<div className="App" style={styles.App}>
 			<div className="App" style={styles.SidePanel} />
 			<div className="App" style={styles.GraphContainer}>
-				<Graph />
+				<CustomFlow />
 			</div>
 		</div>
 	);
