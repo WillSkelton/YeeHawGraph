@@ -11,7 +11,7 @@ const Styles = () => ({
 
 	},
 	Handle: {
-		display: 'none',
+		opacity: '0%',
 	},
 });
 
@@ -35,16 +35,14 @@ export function Circle(data) {
 				style={{
 					...styles.Handle,
 					top: '48%',
-					borderRadius: 0,
 				}} />
 			<div>{label}</div>
 			<Handle
 				type="source"
-				position="top"
+				position="bottom"
 				style={{
 					...styles.Handle,
 					top: '48%',
-					borderRadius: 0,
 				}} />
 		</div>
 	);
