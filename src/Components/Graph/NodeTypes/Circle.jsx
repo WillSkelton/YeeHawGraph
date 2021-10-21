@@ -8,6 +8,7 @@ const Styles = () => ({
 		justifyContent: 'center',
 		alignItems: 'center',
 		padding: 0,
+		boxSizing: 'border-box',
 
 	},
 	Handle: {
@@ -17,7 +18,7 @@ const Styles = () => ({
 
 export function Circle(data) {
 	const config = data.data;
-	const { label, diameter, backgroundColor, color } = config;
+	const { label, diameter, backgroundColor, color, selfLoop } = config;
 
 	const styles = Styles();
 	return (
@@ -28,9 +29,13 @@ export function Circle(data) {
 			borderRadius: diameter || '60px',
 			backgroundColor: backgroundColor || '#4169E1',
 			color: color || '#FFF',
+			borderStyle: selfLoop ? 'double' : 'none',
+			borderColor: color || '#FFF',
+			borderWidth: '4px',
 		}}>
 			<Handle
 				id="a"
+				isConnectable={false}
 				type="source"
 				position="top"
 				style={{
@@ -41,6 +46,7 @@ export function Circle(data) {
 
 			<Handle
 				id="b"
+				isConnectable={false}
 				type="target"
 				position="top"
 				style={{
@@ -50,6 +56,7 @@ export function Circle(data) {
 				}} />
 			<Handle
 				id="c"
+				isConnectable={false}
 				type="source"
 				position="top"
 				style={{
@@ -59,6 +66,7 @@ export function Circle(data) {
 			<div>{label}</div>
 			<Handle
 				id="d"
+				isConnectable={false}
 				type="target"
 				position="bottom"
 				style={{
