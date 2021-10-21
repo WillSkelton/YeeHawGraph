@@ -14,6 +14,9 @@ import {
 
 import { AddSharp } from '@mui/icons-material';
 
+const red = '#DC143C';
+const green = '#3CB371';
+
 const Styles = () => ({
 	tableHeader: {
 		padding: '0px',
@@ -24,6 +27,10 @@ const Styles = () => ({
 	},
 	headerCell: {
 		padding: '0px',
+	},
+	tableRow: {
+		margin: '0px',
+		boxSizing: 'border-box',
 	},
 	tableCell: {
 		// padding: '0px',
@@ -36,20 +43,31 @@ const Styles = () => ({
 		borderRight: '2px solid black',
 		boxSizing: 'border-box',
 	},
+	matrixCell: {
+		border: '0px',
+	},
 });
 
 export function Editor(props) {
-	const { vertexSet } = props;
+	const { vertexSet, setVertexSet } = props;
 
 	const styles = Styles();
 
 	const vertices = Object.keys(vertexSet);
 
+	const handleCellClick = (row, column) => {
+		vertexSet[row][column] = vertexSet[row][column] ? 0 : 1;
+		setVertexSet({ ...vertexSet });
+	};
+
 	return (
 		<TableContainer component={Paper}>
 			<Table size="small">
 				<TableHead style={styles.tableHeader}>
-					<TableRow style={styles.headerRow}>
+					<TableRow style={{
+						...styles.headerRow,
+						...styles.tableRow,
+					}}>
 						<TableCell
 							align="center"
 							style={{
@@ -63,21 +81,24 @@ export function Editor(props) {
 							</Tooltip>
 						</TableCell>
 						{
-							vertices.map(vertex => {
-								console.log(vertex);
-								return (
-									<TableCell align="center" style={styles.headerCell}>
-										{vertex}
-									</TableCell>
-								);
-							})
+							vertices.map(vertex => (
+								<TableCell
+									align="center"
+									style={{
+										...styles.headerCell,
+									}}>
+									{vertex}
+								</TableCell>
+							))
 						}
 					</TableRow>
 				</TableHead>
 				<TableBody>
 					{
 						vertices.map(vertex => (
-							<TableRow>
+							<TableRow style={{
+								...styles.tableRow,
+							}}>
 								<TableCell
 									align="center"
 									style={{
@@ -87,11 +108,15 @@ export function Editor(props) {
 									{vertex}
 								</TableCell>
 								{
-									vertexSet[vertex].map(item => (
+									vertexSet[vertex].map((item, column) => (
 										<TableCell
+											onClick={() => handleCellClick(vertex, column)}
 											align="center"
 											style={{
 												...styles.tableCell,
+												...styles.matrixCell,
+												backgroundColor: item ? green : red,
+												color: item ? 'black' : 'white',
 											}}>
 											{item}
 										</TableCell>
