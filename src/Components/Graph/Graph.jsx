@@ -56,10 +56,21 @@ const customElements = [
 		type: 'circle',
 		position: { x: 100, y: 100 },
 		data: {
-			label: 'Yeet',
+			label: 'Yee',
 			diameter: '100px',
 		},
 	},
+	{
+		id: '2',
+		type: 'circle',
+		position: { x: 500, y: 500 },
+		data: {
+			label: 'Haw',
+			diameter: '100px',
+		},
+	},
+	{ id: 'e1-2', source: '1', target: '2', animated: true },
+	{ id: 'e2-1', source: '2', target: '1', animated: true },
 ];
 
 export function CustomFlow() {
