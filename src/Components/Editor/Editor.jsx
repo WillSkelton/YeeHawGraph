@@ -19,6 +19,17 @@ const red = '#DC143C';
 const green = '#3CB371';
 
 const Styles = () => ({
+	table: {
+		overflowX: 'scroll',
+		overflowY: 'scroll',
+	},
+	tableRow: {
+		margin: '0px',
+		boxSizing: 'border-box',
+	},
+	tableCell: {
+		padding: '0px',
+	},
 	tableHeader: {
 		padding: '0px',
 	},
@@ -28,24 +39,22 @@ const Styles = () => ({
 	},
 	headerCell: {
 		padding: '0px',
+		minWidth: '16px',
+
 	},
-	tableRow: {
-		margin: '0px',
-		boxSizing: 'border-box',
-	},
-	tableCell: {
-		// padding: '0px',
-	},
+
 	addButton: {
 		padding: '0px',
 	},
 	vertexColumn: {
-		// padding: '0px 0px 0px 4px',
 		borderRight: '2px solid black',
 		boxSizing: 'border-box',
+		width: '16px',
 	},
 	matrixCell: {
 		border: '0px',
+		// height: '16px',
+		maxWidth: '16px',
 	},
 });
 
@@ -75,7 +84,7 @@ export function Editor(props) {
 	};
 
 	return (
-		<TableContainer component={Paper}>
+		<TableContainer component={Paper} style={styles.table}>
 			<Table size="small">
 				<TableHead style={styles.tableHeader}>
 					<TableRow style={{
@@ -90,6 +99,7 @@ export function Editor(props) {
 							}}>
 							<Tooltip placement="right" title="Click to Add Vertex">
 								<IconButton
+									disabled={vertices.length >= 26}
 									style={styles.addButton}
 									onClick={handleVertexAdd}>
 									<AddSharp />
