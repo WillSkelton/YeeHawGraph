@@ -72,6 +72,7 @@
 				"code": 150
 			}
 		],
+		"no-unused-vars": "warn",
 		"no-plusplus": 0,
 		"operator-linebreak": [
 			"error",

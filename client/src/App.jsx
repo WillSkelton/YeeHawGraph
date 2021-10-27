@@ -25,6 +25,7 @@ const Styles = () => ({
 		backgroundColor: '#4169E1',
 		boxSizing: 'border-box',
 		border: '2px solid white',
+
 	},
 	Legend: {
 		width: '100%',
