@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { Editor } from './Components/Editor/Editor';
 import { Graph } from './Components/Graph/Graph';
 import { GenerateNodes } from './Modules/GenerateNodes';
+import { Colors } from './Styles/Colors';
 
 document.getElementById('body').style.margin = '0px';
 
@@ -17,23 +18,29 @@ const Styles = state => ({
 	Menu: {
 		width: '40px',
 		backgroundColor: 'black',
+		border: `2px solid ${Colors.blue}`,
+		boxSizing: 'border-box',
+
+		display: 'flex',
+		flexDirection: 'column',
+		justifyContent: 'flex-start',
+		alignItems: 'center',
 	},
 	menuButton: {
-		color: 'white',
+		color: Colors.blue,
 	},
 	SidePanel: {
 		display: 'flex',
 		flexDirection: 'column',
 		width: state.menuOpen ? '30%' : '0%',
 		height: '100%',
-		backgroundColor: '#4169E1',
+		backgroundColor: 'black',
 	},
 	Editor: {
 		width: '100%',
 		height: '70%',
-		backgroundColor: '#4169E1',
+		backgroundColor: 'black',
 		boxSizing: 'border-box',
-		border: '2px solid white',
 
 	},
 	Legend: {
@@ -41,7 +48,7 @@ const Styles = state => ({
 		height: '30%',
 		backgroundColor: 'black',
 		boxSizing: 'border-box',
-		border: '2px solid white',
+		// border: '2px solid white',
 	},
 	GraphContainer: {
 		width: state.menuOpen ? '70%' : '100%',
@@ -51,7 +58,7 @@ const Styles = state => ({
 });
 
 export function App() {
-	const [menuOpen, setMenuOpen] = useState(false);
+	const [menuOpen, setMenuOpen] = useState(true);
 	const styles = Styles({ menuOpen });
 
 	const [vertexSet, setVertexSet] = useState({
