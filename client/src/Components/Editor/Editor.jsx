@@ -20,8 +20,8 @@ const green = '#3CB371';
 
 const Styles = () => ({
 	table: {
-		overflowX: 'scroll',
-		overflowY: 'scroll',
+		// overflowX: 'scroll',
+		// overflowY: 'scroll',
 	},
 	tableRow: {
 		margin: '0px',
