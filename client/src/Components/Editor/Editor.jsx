@@ -14,40 +14,50 @@ import {
 
 import { AddSharp } from '@mui/icons-material';
 import { StringIncrement } from '../../Modules/StringIncrementor';
+import { Colors } from '../../Styles/Colors';
 
-const red = '#DC143C';
-const green = '#3CB371';
+// const red = '#DC143C';
+// const green = '#3CB371';
 
 const Styles = () => ({
 	table: {
-		overflowX: 'scroll',
-		overflowY: 'scroll',
+		// overflowX: 'scroll',
+		// overflowY: 'scroll',
 	},
 	tableRow: {
 		margin: '0px',
 		boxSizing: 'border-box',
+		cursor: 'pointer',
 	},
 	tableCell: {
 		padding: '0px',
+		cursor: 'pointer',
 	},
 	tableHeader: {
 		padding: '0px',
 	},
 	headerRow: {
-		borderBottom: '2px solid black',
+		borderBottom: `2px solid ${Colors.blue}`,
 		boxSizing: 'border-box',
 	},
 	headerCell: {
 		padding: '0px',
 		minWidth: '16px',
-
+		backgroundColor: Colors.backgroundGray,
+		color: Colors.white,
 	},
 
 	addButton: {
 		padding: '0px',
+		color: Colors.white,
 	},
 	vertexColumn: {
-		borderRight: '2px solid black',
+		color: Colors.white,
+		backgroundColor: Colors.backgroundGray,
+		borderTop: '0px',
+		borderBottom: '0px',
+
+		borderRight: `2px solid ${Colors.blue}`,
 		boxSizing: 'border-box',
 		width: '16px',
 	},
@@ -65,7 +75,8 @@ export function Editor(props) {
 
 	const vertices = Object.keys(vertexSet);
 
-	const handleCellClick = (row, column) => {
+	const handleCellClick = (event, row, column) => {
+		event.preventDefault();
 		vertexSet[row][column] = vertexSet[row][column] ? 0 : 1;
 		setVertexSet({ ...vertexSet });
 	};
@@ -83,6 +94,20 @@ export function Editor(props) {
 		setVertexSet(copy);
 	};
 
+	const handleVertexDelete = (event, deleteVertex) => {
+		const idx = vertices.findIndex(vertex => vertex === deleteVertex);
+
+		vertices.forEach(vertex => {
+			vertexSet[vertex].splice(idx, 1);
+		});
+
+		event.preventDefault();
+		const copy = { ...vertexSet };
+		delete copy[deleteVertex];
+
+		setVertexSet(copy);
+	};
+
 	return (
 		<TableContainer component={Paper} style={styles.table}>
 			<Table size="small">
@@ -94,6 +119,7 @@ export function Editor(props) {
 						<TableCell
 							align="center"
 							style={{
+								...styles.tableCell,
 								...styles.vertexColumn,
 								...styles.headerCell,
 							}}>
@@ -108,13 +134,16 @@ export function Editor(props) {
 						</TableCell>
 						{
 							vertices.map(vertex => (
-								<TableCell
-									align="center"
-									style={{
-										...styles.headerCell,
-									}}>
-									{vertex}
-								</TableCell>
+								<Tooltip title="Right-Click to Delete" placement="bottom">
+									<TableCell
+										onContextMenu={event => handleVertexDelete(event, vertex)}
+										align="center"
+										style={{
+											...styles.headerCell,
+										}}>
+										{vertex}
+									</TableCell>
+								</Tooltip>
 							))
 						}
 					</TableRow>
@@ -125,23 +154,27 @@ export function Editor(props) {
 							<TableRow style={{
 								...styles.tableRow,
 							}}>
-								<TableCell
-									align="center"
-									style={{
-										...styles.tableCell,
-										...styles.vertexColumn,
-									}}>
-									{vertex}
-								</TableCell>
+								<Tooltip title="Right-Click to Delete" placement="right">
+									<TableCell
+										onContextMenu={event => handleVertexDelete(event, vertex)}
+										align="center"
+										style={{
+											...styles.tableCell,
+											...styles.vertexColumn,
+										}}>
+										{vertex}
+									</TableCell>
+								</Tooltip>
 								{
 									vertexSet[vertex].map((item, column) => (
 										<TableCell
-											onClick={() => handleCellClick(vertex, column)}
+											onClick={event => handleCellClick(event, vertex, column)}
+											onContextMenu={event => handleCellClick(event, vertex, column)}
 											align="center"
 											style={{
 												...styles.tableCell,
 												...styles.matrixCell,
-												backgroundColor: item ? green : red,
+												backgroundColor: item ? Colors.seaFoam : Colors.red,
 												color: item ? 'black' : 'white',
 											}}>
 											{item}
