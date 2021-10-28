@@ -7,6 +7,7 @@ import ReactFlow, {
 	Controls,
 	Background,
 } from 'react-flow-renderer';
+import { Colors } from '../../Styles/Colors';
 
 import { NodeTypes } from './NodeTypes';
 
@@ -30,6 +31,7 @@ export function Graph(props) {
 			snapToGrid
 			snapGrid={[15, 15]}>
 			<MiniMap
+				style={{ backgroundColor: 'black' }}
 				nodeStrokeColor={n => {
 					if (n.style?.background) {
 						return n.style.background;
@@ -54,7 +56,7 @@ export function Graph(props) {
 						return n.style.background;
 					}
 					if (n.type === 'circle') {
-						return n.data.color || '#4169E1';
+						return n.data.color || Colors.slate;
 					}
 
 					return '#fff';

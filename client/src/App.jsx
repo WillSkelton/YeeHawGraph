@@ -1,5 +1,7 @@
-import { MenuSharp } from '@mui/icons-material';
-import { IconButton, Tooltip } from '@mui/material';
+import { GridOnSharp, LayersSharp, MenuSharp, SettingsSharp } from '@mui/icons-material';
+import { IconButton, Tooltip, Typography } from '@mui/material';
+import { makeStyles } from '@mui/styles';
+
 import React, { useEffect, useState } from 'react';
 import { Editor } from './Components/Editor/Editor';
 import { Graph } from './Components/Graph/Graph';
@@ -8,7 +10,7 @@ import { Colors } from './Styles/Colors';
 
 document.getElementById('body').style.margin = '0px';
 
-const Styles = state => ({
+const useStyles = state => makeStyles({
 	App: {
 		display: 'flex',
 		flexDirection: 'row',
@@ -27,6 +29,9 @@ const Styles = state => ({
 		alignItems: 'center',
 	},
 	menuButton: {
+		'&:hover': {
+			color: Colors.green,
+		},
 		color: Colors.blue,
 	},
 	SidePanel: {
@@ -38,14 +43,14 @@ const Styles = state => ({
 	},
 	Editor: {
 		width: '100%',
-		height: '70%',
+		height: '100%',
 		backgroundColor: 'black',
 		boxSizing: 'border-box',
 
 	},
 	Legend: {
 		width: '100%',
-		height: '30%',
+		height: '100%',
 		backgroundColor: 'black',
 		boxSizing: 'border-box',
 		// border: '2px solid white',
@@ -55,17 +60,19 @@ const Styles = state => ({
 		height: '100%',
 		backgroundColor: '#222',
 	},
-});
+})();
 
 export function App() {
 	const [menuOpen, setMenuOpen] = useState(true);
-	const styles = Styles({ menuOpen });
+	const classes = useStyles({ menuOpen });
+
+	const [selectedTab, setSelectedTab] = useState(0);
 
 	const [vertexSet, setVertexSet] = useState({
-		A: [1, 0, 0, 0],
-		B: [0, 1, 0, 0],
-		C: [0, 0, 1, 0],
-		D: [0, 0, 0, 1],
+		A: [0, 1, 0, 0],
+		B: [0, 0, 1, 0],
+		C: [0, 0, 0, 1],
+		D: [1, 0, 0, 0],
 	});
 
 	const [elements, setElements] = useState([]);
@@ -83,28 +90,61 @@ export function App() {
 		setMenuOpen(!menuOpen);
 	};
 
+	const handleMenuItemClick = itemNumber => {
+		setMenuOpen(!menuOpen || (itemNumber !== selectedTab));
+		setSelectedTab(itemNumber);
+	};
+
 	return (
-		<div className="App" style={styles.App}>
-			<div className="App" style={styles.Menu}>
+		<div className={classes.App}>
+			<div className={classes.Menu}>
 				<Tooltip title="Menu" placement="right">
 					<IconButton onClick={toggleMenu}>
-						<MenuSharp style={styles.menuButton} />
+						<MenuSharp className={classes.menuButton} />
+					</IconButton>
+				</Tooltip>
+				<Tooltip title="Editor" placement="right">
+					<IconButton onClick={() => handleMenuItemClick(0)}>
+						<GridOnSharp className={classes.menuButton} />
+					</IconButton>
+				</Tooltip>
+				<Tooltip title="Legend" placement="right">
+					<IconButton onClick={() => handleMenuItemClick(1)}>
+						<LayersSharp className={classes.menuButton} />
+					</IconButton>
+				</Tooltip>
+				<Tooltip title="Settings" placement="right">
+					<IconButton onClick={() => handleMenuItemClick(2)}>
+						<SettingsSharp className={classes.menuButton} />
 					</IconButton>
 				</Tooltip>
 			</div>
 			{
 				menuOpen && (
-					<div className="App" style={styles.SidePanel}>
-						<div style={styles.Editor}>
-							<Editor
-								vertexSet={vertexSet}
-								setVertexSet={updateVertexSet} />
-						</div>
-						<div style={styles.Legend} />
+					<div className={classes.SidePanel}>
+						{
+							selectedTab === 0 && (
+								<div className={classes.Editor}>
+									<Editor
+										vertexSet={vertexSet}
+										setVertexSet={updateVertexSet} />
+								</div>
+							)
+						}
+						{selectedTab === 1 && (
+							<div className={classes.Legend}>
+								<Typography className={{ color: Colors.white }}>Legend</Typography>
+							</div>
+						)}
+						{selectedTab === 2 && (
+							<div className={classes.Legend}>
+								<Typography className={{ color: Colors.white }}>Settings</Typography>
+							</div>
+						)}
 					</div>
 				)
 			}
-			<div className="App" style={styles.GraphContainer}>
+			<div className={classes.GraphContainer}>
 				<Graph elements={elements} />
 			</div>
 		</div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Handle } from 'react-flow-renderer';
+import { Colors } from '../../../Styles/Colors';
 
 const Styles = () => ({
 	NodeStyles: {
@@ -27,10 +28,10 @@ export function Circle(data) {
 			height: diameter || '60px',
 			width: diameter || '60px',
 			borderRadius: diameter || '60px',
-			backgroundColor: backgroundColor || '#4169E1',
-			color: color || '#FFF',
+			backgroundColor: backgroundColor || Colors.slate,
+			color: color || Colors.white,
 			borderStyle: selfLoop ? 'double' : 'none',
-			borderColor: color || '#FFF',
+			borderColor: color || Colors.white,
 			borderWidth: selfLoop ? '4px' : '0px',
 		}}>
 			<Handle
