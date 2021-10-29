@@ -15,7 +15,8 @@ const useStyles = state => makeStyles({
 	App: {
 		display: 'flex',
 		flexDirection: state.menuVertical ? 'row' : 'column',
-		width: state.menuVertical ? '100vw' : '98vw',
+		width: '100vw',
+		// width: state.menuVertical ? '100vw' : '98vw',
 		height: state.menuVertical ? '100vh' : '98vh',
 	},
 	Menu: {
