@@ -1,3 +1,5 @@
+const r = 500;
+
 export const customElements = [
 	{
 		id: '1',
@@ -38,6 +40,27 @@ export const customElements = [
 	},
 ];
 
+export function getCoords(theta) {
+	const radians = (theta * Math.PI) / 180;
+	const x = r * (Math.cos(radians));
+	const y = r * (Math.sin(radians));
+	return [x, y];
+}
+
+export function generatePositions(nodes) {
+	const numberOfNodes = nodes.length;
+	const theta = 360 / numberOfNodes;
+
+	nodes.forEach((node, index) => {
+		const thetaSubI = theta * (index + 1);
+		const [x, y] = getCoords(thetaSubI);
+
+		// eslint-disable-next-line no-param-reassign
+		node.position = { x, y };
+		// console.log(`${node.id}: (${x}, ${y})`);
+	});
+}
+
 export function GenerateNodes(vertexSet) {
 	const vertices = Object.keys(vertexSet);
 
@@ -48,7 +71,7 @@ export function GenerateNodes(vertexSet) {
 		const node = {
 			id: vertexName,
 			type: 'circle',
-			position: { x: 500, y: 100 * rowNumber },
+			position: { x: 0, y: 0 },
 			data: {
 				label: vertexName,
 				selfLoop: false,
@@ -82,6 +105,8 @@ export function GenerateNodes(vertexSet) {
 			edges.push(edge);
 		});
 	});
+
+	generatePositions(nodes);
 
 	return [
 		...nodes,
