@@ -18,20 +18,18 @@ export function Graph(props) {
 	const onElementsRemove = () => { };
 	const onConnect = () => { };
 
-	const [flowInstance, setFlowInstance] = useState({});
+	const [flowInstance, setFlowInstance] = useState(undefined);
 
 	// const { fitBounds } = useZoomPanHelper();
 
 	const onLoad = reactFlowInstance => {
-		// console.log('flow loaded:', reactFlowInstance);
 		reactFlowInstance.fitView();
-		// reactFlowInstance.setTransform({ x: 0, y: 0, zoom: 1 });
 		setFlowInstance(reactFlowInstance);
 	};
 
 	useEffect(() => {
-		// console.log(flowInstance);
-		flowInstance.fitView();
+		// eslint-disable-next-line no-unused-expressions
+		flowInstance && flowInstance.fitView();
 	}, [elements, flowInstance]);
 
 	return (

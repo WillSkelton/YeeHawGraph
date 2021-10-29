@@ -1,5 +1,5 @@
 # YeeHaw Graph
 
-Check this out:
+Now live at:
 
-![demo](./demo.gif)
+https://yeehawgraph.herokuapp.com/
