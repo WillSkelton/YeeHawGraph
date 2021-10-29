@@ -63,7 +63,7 @@ const useStyles = state => makeStyles({
 })();
 
 export function App() {
-	const [menuOpen, setMenuOpen] = useState(true);
+	const [menuOpen, setMenuOpen] = useState(false);
 	const classes = useStyles({ menuOpen });
 
 	const [selectedTab, setSelectedTab] = useState(0);
