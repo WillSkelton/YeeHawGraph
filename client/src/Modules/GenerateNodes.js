@@ -1,4 +1,4 @@
-const r = 250;
+const r = 300;
 
 export const customElements = [
 	{
@@ -75,6 +75,7 @@ export function GenerateNodes(vertexSet) {
 			data: {
 				label: vertexName,
 				selfLoop: false,
+				diameter: '30px',
 			},
 		};
 
