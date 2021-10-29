@@ -5,6 +5,7 @@ import { makeStyles } from '@mui/styles';
 import React, { useEffect, useState } from 'react';
 import { Editor } from './Components/Editor/Editor';
 import { Graph } from './Components/Graph/Graph';
+import { Settings } from './Components/Settings/Settings';
 import { GenerateNodes } from './Modules/GenerateNodes';
 import { Colors } from './Styles/Colors';
 
@@ -13,18 +14,19 @@ document.getElementById('body').style.margin = '0px';
 const useStyles = state => makeStyles({
 	App: {
 		display: 'flex',
-		flexDirection: 'row',
+		flexDirection: state.menuVertical ? 'row' : 'column',
 		width: '100vw',
 		height: '100vh',
 	},
 	Menu: {
-		width: '40px',
+		width: state.menuVertical ? '40px' : '100%',
+		height: state.menuVertical ? '100%' : '40px',
 		backgroundColor: 'black',
 		border: `2px solid ${Colors.blue}`,
 		boxSizing: 'border-box',
 
 		display: 'flex',
-		flexDirection: 'column',
+		flexDirection: state.menuVertical ? 'column' : 'row',
 		justifyContent: 'flex-start',
 		alignItems: 'center',
 	},
@@ -36,16 +38,28 @@ const useStyles = state => makeStyles({
 	},
 	SidePanel: {
 		display: 'flex',
-		flexDirection: 'column',
-		width: state.menuOpen ? '30%' : '0%',
-		height: '100%',
 		backgroundColor: 'black',
+		flexDirection: state.menuVertical ? 'row' : 'column',
+		// eslint-disable-next-line no-nested-ternary
+		width: state.menuVertical ?
+			state.menuOpen ?
+				'30%' :
+				'0%' :
+			'100%',
+		// eslint-disable-next-line no-nested-ternary
+		height: state.menuVertical ?
+			'100%' :
+			state.menuOpen ?
+				'30%' :
+				'0%',
 	},
 	Editor: {
 		width: '100%',
 		height: '100%',
 		backgroundColor: 'black',
 		boxSizing: 'border-box',
+		overflowX: 'auto',
+		overflowY: 'auto',
 
 	},
 	Legend: {
@@ -56,15 +70,27 @@ const useStyles = state => makeStyles({
 		// border: '2px solid white',
 	},
 	GraphContainer: {
-		width: state.menuOpen ? '70%' : '100%',
-		height: '100%',
+		// eslint-disable-next-line no-nested-ternary
+		width: state.menuVertical ?
+			state.menuOpen ?
+				'70%' :
+				'100%' :
+			'100%',
+		// eslint-disable-next-line no-nested-ternary
+		height: state.menuVertical ?
+			'100%' :
+			state.menuOpen ?
+				'70%' :
+				'100%',
 		backgroundColor: '#222',
 	},
 })();
 
 export function App() {
 	const [menuOpen, setMenuOpen] = useState(false);
-	const classes = useStyles({ menuOpen });
+	const [menuVertical, setMenuVertical] = useState(true);
+	const [showMinimap, setShowMinimap] = useState(true);
+	const classes = useStyles({ menuOpen, menuVertical });
 
 	const [selectedTab, setSelectedTab] = useState(0);
 
@@ -138,14 +164,18 @@ export function App() {
 						)}
 						{selectedTab === 2 && (
 							<div className={classes.Legend}>
-								<Typography className={{ color: Colors.white }}>Settings</Typography>
+								<Settings
+									toggleMenuOrientation={() => setMenuVertical(!menuVertical)}
+									toggleMinimap={() => setShowMinimap(!showMinimap)}
+									menuVertical={menuVertical}
+									showMinimap={showMinimap} />
 							</div>
 						)}
 					</div>
 				)
 			}
 			<div className={classes.GraphContainer}>
-				<Graph elements={elements} />
+				<Graph elements={elements} showMinimap={showMinimap} />
 			</div>
 		</div>
 	);
