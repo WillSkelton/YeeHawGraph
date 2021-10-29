@@ -23,14 +23,14 @@ export function Graph(props) {
 	// const { fitBounds } = useZoomPanHelper();
 
 	const onLoad = reactFlowInstance => {
-		console.log('flow loaded:', reactFlowInstance);
+		// console.log('flow loaded:', reactFlowInstance);
 		reactFlowInstance.fitView();
 		// reactFlowInstance.setTransform({ x: 0, y: 0, zoom: 1 });
 		setFlowInstance(reactFlowInstance);
 	};
 
 	useEffect(() => {
-		console.log(flowInstance);
+		// console.log(flowInstance);
 		flowInstance.fitView();
 	}, [elements, flowInstance]);
 

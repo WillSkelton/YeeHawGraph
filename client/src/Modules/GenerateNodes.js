@@ -57,7 +57,7 @@ export function generatePositions(nodes) {
 
 		// eslint-disable-next-line no-param-reassign
 		node.position = { x, y };
-		console.log(`${node.id}: (${x}, ${y})`);
+		// console.log(`${node.id}: (${x}, ${y})`);
 	});
 }
 
