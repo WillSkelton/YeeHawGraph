@@ -1,4 +1,4 @@
-const r = 300;
+const r = 250;
 
 export const customElements = [
 	{
