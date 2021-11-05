@@ -75,9 +75,35 @@ export function Editor(props) {
 
 	const vertices = Object.keys(vertexSet);
 
+	const cellColors = [
+		{
+			backgroundColor: Colors.red,
+			color: Colors.white,
+		},
+		{
+			backgroundColor: Colors.seaFoam,
+			color: Colors.black,
+		},
+		{
+			backgroundColor: Colors.cyan,
+			color: Colors.black,
+		},
+	];
+
 	const handleCellClick = (event, row, column) => {
 		event.preventDefault();
-		vertexSet[row][column] = vertexSet[row][column] ? 0 : 1;
+		vertexSet[row][column] = (vertexSet[row][column] + 1) % 3;
+		setVertexSet({ ...vertexSet });
+	};
+
+	const handleCellRightClick = (event, row, column) => {
+		event.preventDefault();
+
+		if (vertexSet[row][column] === 0) {
+			vertexSet[row][column] = 2;
+		} else {
+			vertexSet[row][column] -= 1;
+		}
 		setVertexSet({ ...vertexSet });
 	};
 
@@ -169,13 +195,13 @@ export function Editor(props) {
 									vertexSet[vertex].map((item, column) => (
 										<TableCell
 											onClick={event => handleCellClick(event, vertex, column)}
-											onContextMenu={event => handleCellClick(event, vertex, column)}
+											onContextMenu={event => handleCellRightClick(event, vertex, column)}
 											align="center"
 											style={{
 												...styles.tableCell,
 												...styles.matrixCell,
-												backgroundColor: item ? Colors.seaFoam : Colors.red,
-												color: item ? 'black' : 'white',
+												backgroundColor: cellColors[item].backgroundColor,
+												color: cellColors[item].color,
 											}}>
 											{item}
 										</TableCell>
