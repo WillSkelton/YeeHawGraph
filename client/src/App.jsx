@@ -103,6 +103,10 @@ export function App() {
 
 	const [elements, setElements] = useState([]);
 
+	// const matrix = Object.values(vertexSet).reduce((previous, current) => ([...previous, ...current]), []).join('');
+
+	// console.log(matrix);
+
 	useEffect(() => {
 		setElements(GenerateNodes(vertexSet));
 	}, []);
