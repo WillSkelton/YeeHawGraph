@@ -82,16 +82,15 @@ export function GenerateNodes(vertexSet) {
 		nodes.push(node);
 
 		vertexSet[vertexName].forEach((matrixElement, columnNumber) => {
-			if (columnNumber === rowNumber && matrixElement >= 1) {
-				node.data.selfLoop = columnNumber === rowNumber;
-				return;
-			}
-
 			if (matrixElement < 1) {
 				return;
 			}
 
 			const adjacentVertexName = vertices[columnNumber];
+
+			if (columnNumber === rowNumber && matrixElement >= 1) {
+				node.data.selfLoop = columnNumber === rowNumber;
+			}
 
 			const edge = {
 				id: `${vertexName}->${adjacentVertexName}`,

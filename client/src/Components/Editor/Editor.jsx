@@ -9,7 +9,6 @@ import {
 	TableRow,
 	Paper,
 	IconButton,
-	Tooltip,
 } from '@mui/material';
 
 import { AddSharp } from '@mui/icons-material';
@@ -149,27 +148,23 @@ export function Editor(props) {
 								...styles.vertexColumn,
 								...styles.headerCell,
 							}}>
-							<Tooltip placement="right" title="Click to Add Vertex">
-								<IconButton
-									disabled={vertices.length >= 26}
-									style={styles.addButton}
-									onClick={handleVertexAdd}>
-									<AddSharp />
-								</IconButton>
-							</Tooltip>
+							<IconButton
+								disabled={vertices.length >= 26}
+								style={styles.addButton}
+								onClick={handleVertexAdd}>
+								<AddSharp />
+							</IconButton>
 						</TableCell>
 						{
 							vertices.map(vertex => (
-								<Tooltip title="Right-Click to Delete" placement="bottom">
-									<TableCell
-										onContextMenu={event => handleVertexDelete(event, vertex)}
-										align="center"
-										style={{
-											...styles.headerCell,
-										}}>
-										{vertex}
-									</TableCell>
-								</Tooltip>
+								<TableCell
+									onContextMenu={event => handleVertexDelete(event, vertex)}
+									align="center"
+									style={{
+										...styles.headerCell,
+									}}>
+									{vertex}
+								</TableCell>
 							))
 						}
 					</TableRow>
@@ -180,17 +175,15 @@ export function Editor(props) {
 							<TableRow style={{
 								...styles.tableRow,
 							}}>
-								<Tooltip title="Right-Click to Delete" placement="right">
-									<TableCell
-										onContextMenu={event => handleVertexDelete(event, vertex)}
-										align="center"
-										style={{
-											...styles.tableCell,
-											...styles.vertexColumn,
-										}}>
-										{vertex}
-									</TableCell>
-								</Tooltip>
+								<TableCell
+									onContextMenu={event => handleVertexDelete(event, vertex)}
+									align="center"
+									style={{
+										...styles.tableCell,
+										...styles.vertexColumn,
+									}}>
+									{vertex}
+								</TableCell>
 								{
 									vertexSet[vertex].map((item, column) => (
 										<TableCell

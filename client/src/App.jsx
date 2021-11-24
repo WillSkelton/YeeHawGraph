@@ -1,4 +1,4 @@
-import { GridOnSharp, LayersSharp, MenuSharp, SettingsSharp } from '@mui/icons-material';
+import { GridOnSharp, LayersSharp, MenuSharp, SettingsSharp, BarChartSharp } from '@mui/icons-material';
 import { IconButton, Tooltip, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 
@@ -6,6 +6,7 @@ import React, { useEffect, useState } from 'react';
 import { Editor } from './Components/Editor/Editor';
 import { Graph } from './Components/Graph/Graph';
 import { Settings } from './Components/Settings/Settings';
+import { Stats } from './Components/Stats/Stats';
 import { GenerateNodes } from './Modules/GenerateNodes';
 import { Colors } from './Styles/Colors';
 
@@ -138,13 +139,18 @@ export function App() {
 						<GridOnSharp className={classes.menuButton} />
 					</IconButton>
 				</Tooltip>
-				<Tooltip title="Legend" placement="right">
+				<Tooltip title="Stats" placement="right">
 					<IconButton onClick={() => handleMenuItemClick(1)}>
+						<BarChartSharp className={classes.menuButton} />
+					</IconButton>
+				</Tooltip>
+				<Tooltip title="Legend" placement="right">
+					<IconButton onClick={() => handleMenuItemClick(2)}>
 						<LayersSharp className={classes.menuButton} />
 					</IconButton>
 				</Tooltip>
 				<Tooltip title="Settings" placement="right">
-					<IconButton onClick={() => handleMenuItemClick(2)}>
+					<IconButton onClick={() => handleMenuItemClick(3)}>
 						<SettingsSharp className={classes.menuButton} />
 					</IconButton>
 				</Tooltip>
@@ -161,20 +167,27 @@ export function App() {
 								</div>
 							)
 						}
-						{selectedTab === 1 && (
-							<div className={classes.Legend}>
-								<Typography className={{ color: Colors.white }}>Legend</Typography>
-							</div>
-						)}
-						{selectedTab === 2 && (
-							<div className={classes.Legend}>
-								<Settings
-									toggleMenuOrientation={() => setMenuVertical(!menuVertical)}
-									toggleMinimap={() => setShowMinimap(!showMinimap)}
-									menuVertical={menuVertical}
-									showMinimap={showMinimap} />
-							</div>
-						)}
+						{
+							selectedTab === 1 && <Stats elements={elements} />
+						}
+						{
+							selectedTab === 2 && (
+								<div className={classes.Legend}>
+									<Typography style={{ color: Colors.white }}>Legend</Typography>
+								</div>
+							)
+						}
+						{
+							selectedTab === 3 && (
+								<div className={classes.Legend}>
+									<Settings
+										toggleMenuOrientation={() => setMenuVertical(!menuVertical)}
+										toggleMinimap={() => setShowMinimap(!showMinimap)}
+										menuVertical={menuVertical}
+										showMinimap={showMinimap} />
+								</div>
+							)
+						}
 					</div>
 				)
 			}
