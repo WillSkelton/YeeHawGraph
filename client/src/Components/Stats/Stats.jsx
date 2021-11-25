@@ -10,12 +10,16 @@ export function Stats(props) {
 	const vertices = [];
 	const edges = [];
 
-	// Future Will: The number of vertices is right but number of edges doesn't include self references.
+	let selfLoops = 0;
 
 	elements.forEach(element => {
 		if (element.id.includes('->')) {
 			edges.push(element);
 			return;
+		}
+
+		if (element.data.selfLoop) {
+			selfLoops++;
 		}
 
 		vertices.push(element);
@@ -26,6 +30,7 @@ export function Stats(props) {
 			<Typography variant="h3" style={{ color: Colors.white }}>Stats:</Typography>
 			<Typography style={{ color: Colors.white }}>{`Number of Vertices (n): ${vertices.length}`}</Typography>
 			<Typography style={{ color: Colors.white }}>{`Number of Edges (m): ${edges.length}`}</Typography>
+			<Typography style={{ color: Colors.white }}>{`Self Loops: ${selfLoops}`}</Typography>
 		</div>
 	);
 }
