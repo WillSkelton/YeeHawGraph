@@ -68,7 +68,7 @@ const Styles = () => ({
 });
 
 export function Editor(props) {
-	const { vertexSet, setVertexSet } = props;
+	const { vertexSet, setVertexSet, clearVertexSet } = props;
 
 	const styles = Styles();
 
@@ -151,7 +151,11 @@ export function Editor(props) {
 							<IconButton
 								disabled={vertices.length >= 26}
 								style={styles.addButton}
-								onClick={handleVertexAdd}>
+								onClick={handleVertexAdd}
+								onContextMenu={event => {
+									event.preventDefault();
+									clearVertexSet();
+								}}>
 								<AddSharp />
 							</IconButton>
 						</TableCell>
