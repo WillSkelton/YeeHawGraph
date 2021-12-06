@@ -117,6 +117,17 @@ export function App() {
 		setElements(GenerateNodes(newValue));
 	};
 
+	const clearVertexSet = () => {
+		const copy = { ...vertexSet };
+
+		Object.keys(copy)
+			.forEach(key => {
+				copy[key] = copy[key].map(() => 0);
+			});
+
+		updateVertexSet(copy);
+	};
+
 	const toggleMenu = () => {
 		setMenuOpen(!menuOpen);
 	};
@@ -163,7 +174,8 @@ export function App() {
 								<div className={classes.Editor}>
 									<Editor
 										vertexSet={vertexSet}
-										setVertexSet={updateVertexSet} />
+										setVertexSet={updateVertexSet}
+										clearVertexSet={clearVertexSet} />
 								</div>
 							)
 						}
