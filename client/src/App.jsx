@@ -95,8 +95,10 @@ const useStyles = state => makeStyles({
 })();
 
 export function App() {
+	const { innerWidth } = window;
+
 	const [menuOpen, setMenuOpen] = useState(false);
-	const [menuVertical, setMenuVertical] = useState(true);
+	const [menuVertical, setMenuVertical] = useState(innerWidth >= 1000);
 	const [showMinimap, setShowMinimap] = useState(true);
 	const [selectedTab, setSelectedTab] = useState(0);
 
