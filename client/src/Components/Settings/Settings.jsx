@@ -16,11 +16,12 @@ const Styles = state => ({
 		margin: '12px 12px',
 		backgroundColor: Colors.blue,
 		color: Colors.white,
+		textTransform: 'none',
 	},
 });
 
 export function Settings(props) {
-	const { toggleMenuOrientation, toggleMinimap, menuVertical, showMinimap } = props;
+	const { toggleMenuOrientation, toggleMinimap, menuVertical } = props;
 
 	const styles = Styles({ menuVertical });
 	return (
@@ -29,12 +30,9 @@ export function Settings(props) {
 				style={styles.button}
 				variant="contained"
 				onClick={toggleMenuOrientation}>
-				Toggle Menu Orientation
+				Flip Menu
 			</Button>
-			<Button
-				style={styles.button}
-				variant="contained"
-				onClick={toggleMinimap}>
+			<Button style={styles.button} variant="contained" onClick={toggleMinimap}>
 				Toggle Minimap
 			</Button>
 		</div>

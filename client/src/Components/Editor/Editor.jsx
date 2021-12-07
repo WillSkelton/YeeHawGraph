@@ -147,6 +147,10 @@ export function Editor(props) {
 								...styles.tableCell,
 								...styles.vertexColumn,
 								...styles.headerCell,
+							}}
+							onContextMenu={event => {
+								event.preventDefault();
+								clearVertexSet();
 							}}>
 							<IconButton
 								disabled={vertices.length >= 26}
