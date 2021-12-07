@@ -1,10 +1,11 @@
 import { GridOnSharp, LayersSharp, MenuSharp, SettingsSharp, BarChartSharp } from '@mui/icons-material';
 import { IconButton, Tooltip, Typography } from '@mui/material';
-import { makeStyles } from '@mui/styles';
+import { makeStyles, StylesContext } from '@mui/styles';
 
 import React, { useEffect, useState } from 'react';
 import { Editor } from './Components/Editor/Editor';
 import { Graph } from './Components/Graph/Graph';
+import { Legend } from './Components/Legend/Legend';
 import { Settings } from './Components/Settings/Settings';
 import { Stats } from './Components/Stats/Stats';
 import { GenerateNodes } from './Modules/GenerateNodes';
@@ -44,14 +45,14 @@ const useStyles = state => makeStyles({
 		// eslint-disable-next-line no-nested-ternary
 		width: state.menuVertical ?
 			state.menuOpen ?
-				'30%' :
+				`${state.panelSize}%` :
 				'0%' :
 			'100%',
 		// eslint-disable-next-line no-nested-ternary
 		height: state.menuVertical ?
 			'100%' :
 			state.menuOpen ?
-				'30%' :
+				`${state.panelSize}%` :
 				'0%',
 	},
 	Editor: {
@@ -70,18 +71,24 @@ const useStyles = state => makeStyles({
 		boxSizing: 'border-box',
 		// border: '2px solid white',
 	},
+	Stats: {
+		width: '100%',
+		height: '100%',
+		overflowX: 'auto',
+		overflowY: 'auto',
+	},
 	GraphContainer: {
 		// eslint-disable-next-line no-nested-ternary
 		width: state.menuVertical ?
 			state.menuOpen ?
-				'70%' :
+				`${100 - state.panelSize}%` :
 				'100%' :
 			'100%',
 		// eslint-disable-next-line no-nested-ternary
 		height: state.menuVertical ?
 			'100%' :
 			state.menuOpen ?
-				'70%' :
+				`${100 - state.panelSize}%` :
 				'100%',
 		backgroundColor: '#222',
 	},
@@ -91,9 +98,11 @@ export function App() {
 	const [menuOpen, setMenuOpen] = useState(false);
 	const [menuVertical, setMenuVertical] = useState(true);
 	const [showMinimap, setShowMinimap] = useState(true);
-	const classes = useStyles({ menuOpen, menuVertical });
-
 	const [selectedTab, setSelectedTab] = useState(0);
+
+	const panelSizes = [30, 20, 30, 40];
+
+	const classes = useStyles({ menuOpen, menuVertical, panelSize: panelSizes[selectedTab] });
 
 	const [vertexSet, setVertexSet] = useState({
 		A: [0, 1, 0, 0],
@@ -115,6 +124,17 @@ export function App() {
 	const updateVertexSet = newValue => {
 		setVertexSet(newValue);
 		setElements(GenerateNodes(newValue));
+	};
+
+	const clearVertexSet = () => {
+		const copy = { ...vertexSet };
+
+		Object.keys(copy)
+			.forEach(key => {
+				copy[key] = copy[key].map(() => 0);
+			});
+
+		updateVertexSet(copy);
 	};
 
 	const toggleMenu = () => {
@@ -163,17 +183,22 @@ export function App() {
 								<div className={classes.Editor}>
 									<Editor
 										vertexSet={vertexSet}
-										setVertexSet={updateVertexSet} />
+										setVertexSet={updateVertexSet}
+										clearVertexSet={clearVertexSet} />
 								</div>
 							)
 						}
 						{
-							selectedTab === 1 && <Stats elements={elements} />
+							selectedTab === 1 && (
+								<div className={classes.Stats}>
+									<Stats elements={elements} />
+								</div>
+							)
 						}
 						{
 							selectedTab === 2 && (
 								<div className={classes.Legend}>
-									<Typography style={{ color: Colors.white }}>Legend</Typography>
+									<Legend />
 								</div>
 							)
 						}
