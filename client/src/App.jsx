@@ -69,6 +69,8 @@ const useStyles = state => makeStyles({
 		height: '100%',
 		backgroundColor: 'black',
 		boxSizing: 'border-box',
+		overflowX: 'auto',
+		overflowY: 'auto',
 		// border: '2px solid white',
 	},
 	Stats: {

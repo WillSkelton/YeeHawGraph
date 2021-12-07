@@ -8,6 +8,7 @@ const Styles = () => ({
 	root: {
 		padding: '16px',
 	},
+
 	section: {
 		margin: '8px 0px',
 	},
