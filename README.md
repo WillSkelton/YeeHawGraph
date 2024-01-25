@@ -1,7 +1,4 @@
 # YeeHaw Graph
-Now live at:
-https://yeehawgraph.herokuapp.com/
-
 ## Contents:
 - [YeeHaw Graph](#yeehaw-graph)
 	- [Contents:](#contents)
